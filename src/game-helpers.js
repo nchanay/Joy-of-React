@@ -53,3 +53,28 @@ export function checkGuess(guess, answer) {
 
   return result;
 }
+
+export function getLetterStatuses(guesses, answer) {
+  const statusMap = {};
+
+  // Process each guess
+  guesses.forEach(guess => {
+    const checkedGuess = checkGuess(guess, answer);
+    if (!checkedGuess) return;
+
+    checkedGuess.forEach(({ letter, status }) => {
+      const currentStatus = statusMap[letter];
+
+      // Priority: correct > misplaced > incorrect
+      if (status === 'correct') {
+        statusMap[letter] = 'correct';
+      } else if (status === 'misplaced' && currentStatus !== 'correct') {
+        statusMap[letter] = 'misplaced';
+      } else if (!currentStatus) {
+        statusMap[letter] = status;
+      }
+    });
+  });
+
+  return statusMap;
+}
