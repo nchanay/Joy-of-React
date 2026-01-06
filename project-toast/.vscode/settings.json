@@ -1,0 +1,5 @@
+{
+    "markdown.validate.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "github.copilot.chat.customAgents.showOrganizationAndEnterpriseAgents": true
+}
